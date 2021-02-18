@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Camera))]
 public class Snapshot : MonoBehaviour
@@ -15,7 +16,6 @@ public class Snapshot : MonoBehaviour
         snapCam = GetComponent<Camera>();
         snapCam.targetTexture = new RenderTexture(resolutionWidth, resolutionHeight, 24);
         snapCam.gameObject.SetActive(false);
-        Debug.Log(snapCam.gameObject.name);
     }
 
 
@@ -42,6 +42,6 @@ public class Snapshot : MonoBehaviour
 
     private string getFileName()
     {
-        return string.Format("{0}/Snapshots/{1}_{2}x{3}_{4}.png", Application.dataPath, snapCam.gameObject.name, resolutionWidth, resolutionHeight, System.DateTime.Now.ToString("yyyy-mm-dd_hh-mm-ss"));
+        return string.Format("{0}/Snapshots/{1}{2}.png", Application.dataPath, SceneManager.GetActiveScene().name, snapCam.gameObject.name);
     }
 }
